@@ -1,0 +1,11 @@
+{
+  "title": "A JSON Schema for the Graviton 2 LoadConfig JSON file format.",
+  "id": "http://github.com/libgraviton...",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "required": [
+  ],
+  "additionalProperties": false,
+  "properties": {
+  }
+}
