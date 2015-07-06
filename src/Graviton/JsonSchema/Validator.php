@@ -1,12 +1,24 @@
 <?php
+/**
+ * Validates JSON data against a schema
+ */
 
 namespace Graviton\JsonSchema;
 
 use \JsonSchema\Uri\Retrievers\FileGetContents;
 use \JsonSchema\Validator as SchemaValidator;
 
-class Validator {
-
+/**
+ * Validator
+ *
+ * A wrapper around justinrainbow/json-schema for our purposes of validating JSON schemas
+ *
+ * @author   List of contributors <https://github.com/libgraviton/json-schema/graphs/contributors>
+ * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @link     http://swisscom.ch
+ */
+class Validator
+{
     const TYPE_SCHEMA_DRAFT_4 = 'http://json-schema.org/draft-04/schema#';
 
     private $errors = [];
@@ -30,7 +42,7 @@ class Validator {
      * Validates the string $data agains the schema as defined in url $schemaUrl
      *
      * @param string $schema Schema as string
-     * @param string $data      Data as string
+     * @param string $data   Data as string
      *
      * @return bool
      */
@@ -57,5 +69,4 @@ class Validator {
     {
         return $this->errors;
     }
-
 }
