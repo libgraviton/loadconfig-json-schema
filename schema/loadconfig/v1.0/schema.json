@@ -3,40 +3,9 @@
   "id": "http://github.com/libgraviton...",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "definitions": {
-    "loadConfigObject": {
-      "type": "object",
-      "required": [
-        "id",
-        "description"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "A string value unique to this document."
-        },
-        "description": {
-          "type": "string",
-          "description": "A description text describing the service this JSON file is defining."
-        },
-        "loadPackage": {
-          "type": "string",
-          "description": "Optional name of the loadPackage this LoadConfig is part of."
-        },
-        "dependencies": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "uniqueItems": true,
-          "description": "Array of LoadConfigObject IDs this LoadConfigObject depends on in a load context."
-        },
-        "target": {
-        }
-      }
-    },
     "loadConfigObjectTarget": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "connectionName": {
           "type": "string",
@@ -52,5 +21,34 @@
         }
       }
     }
+  },
+  "type": "object",
+  "required": [
+    "id",
+    "description"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "A string value unique to this document."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description text describing the service this JSON file is defining."
+    },
+    "loadPackage": {
+      "type": "string",
+      "description": "Optional name of the loadPackage this LoadConfig is part of."
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "description": "Array of LoadConfigObject IDs this LoadConfigObject depends on in a load context."
+    },
+    "target": {"$ref": "#\/definitions\/loadConfigObjectTarget"}
   }
 }
