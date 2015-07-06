@@ -1,0 +1,56 @@
+{
+  "title": "A JSON Schema for the Graviton 2 LoadConfig JSON file format.",
+  "id": "http://github.com/libgraviton...",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "loadConfigObject": {
+      "type": "object",
+      "required": [
+        "id",
+        "description"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A string value unique to this document."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description text describing the service this JSON file is defining."
+        },
+        "loadPackage": {
+          "type": "string",
+          "description": "Optional name of the loadPackage this LoadConfig is part of."
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "description": "Array of LoadConfigObject IDs this LoadConfigObject depends on in a load context."
+        },
+        "target": {
+        }
+      }
+    },
+    "loadConfigObjectTarget": {
+      "type": "object",
+      "properties": {
+        "connectionName": {
+          "type": "string",
+          "description": "Name of the connection this LoadConfigObject loads its data to."
+        },
+        "collectionName": {
+          "type": "string",
+          "description": "Name of the MongoDB collection this LoadConfigObject should load its data into."
+        },
+        "sqlFile": {
+          "type": "string",
+          "description": "Name of the MongoDB collection this LoadConfigObject should load its data into."
+        }
+      }
+    }
+  }
+}

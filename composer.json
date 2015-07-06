@@ -1,0 +1,16 @@
+{
+  "name": "libgraviton/json-schema",
+  "description": "JSON Schemas describing the Graviton specific JSON formats",
+  "type": "library",
+  "license": "GPL",
+  "authors": [
+    {
+      "name": "List of contributors",
+      "homepage": "https://github.com/libgraviton/json-schema/graphs/contributors"
+    }
+  ],
+  "require": {
+    "justinrainbow/json-schema": "^1.4"
+  },
+  "minimum-stability": "stable"
+}
