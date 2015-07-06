@@ -9,8 +9,16 @@
       "homepage": "https://github.com/libgraviton/json-schema/graphs/contributors"
     }
   ],
+  "autoload": {
+    "psr-0": {"Graviton": "src/"}
+  },
   "require": {
     "justinrainbow/json-schema": "^1.4"
+  },
+  "scripts": {
+    "check": [
+      "php ./scripts/validate.php"
+    ]
   },
   "minimum-stability": "stable"
 }
