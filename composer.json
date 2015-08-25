@@ -1,5 +1,5 @@
 {
-  "name": "graviton/json-schema",
+  "name": "libgraviton/json-schema",
   "description": "JSON Schemas describing the Graviton specific JSON formats",
   "type": "library",
   "license": "GPL",
