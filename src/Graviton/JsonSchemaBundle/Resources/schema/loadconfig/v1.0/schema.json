@@ -133,6 +133,10 @@
           "title": "Is service read-only",
           "type": "boolean"
         },
+        "recordOriginModifiable": {
+          "title": "Can record origin be modified",
+          "type": "boolean"
+        },
         "routerBase": {
           "title": "Router base path",
           "$ref": "#/definitions/routerBase"
