@@ -37,7 +37,6 @@ class ValidateSchemaApplication extends Application
 
     protected function getDefaultCommands()
     {
-        // TODO: $ref resolving failed with infinite loop
         $schema = 'http://json-schema.org/draft-04/schema#';
 
         $command = new ValidateSchemaCommand('validate');

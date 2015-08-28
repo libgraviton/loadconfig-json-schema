@@ -2,9 +2,9 @@
 namespace Graviton\JsonSchemaBin;
 
 use Graviton\JsonSchemaBundle\Schema\SchemaFactory;
+use Graviton\JsonSchemaBundle\Schema\RefResolver;
 use Graviton\JsonSchemaBundle\Validator\Validator;
 use HadesArchitect\JsonSchemaBundle\Validator\ValidatorService;
-use JsonSchema\RefResolver;
 
 if (!ini_get('date.timezone')) {
     ini_set('date.timezone', 'UTC');
