@@ -30,7 +30,7 @@ class RefResolver extends BaseRefResolver
     /**
      * Constructor
      *
-     * @param UriRetriever $retriever
+     * @param UriRetriever $retriever URI retriever
      */
     public function __construct($retriever = null)
     {
@@ -50,7 +50,7 @@ class RefResolver extends BaseRefResolver
         foreach ($this->resolved as $schema) {
             unset($this->resolved[$schema]);
         }
-        foreach ($this->loaded as $schema => $_) {
+        foreach (array_keys($this->loaded) as $schema) {
             unset($this->loaded[$schema]);
         }
     }
@@ -77,6 +77,7 @@ class RefResolver extends BaseRefResolver
      *
      * @param object $schema    JSON Schema to resolve
      * @param string $sourceUri URI where this schema was located
+     * @return void
      */
     public function resolve($schema, $sourceUri = null)
     {
