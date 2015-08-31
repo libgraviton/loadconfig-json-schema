@@ -24,6 +24,7 @@
   },
   "scripts": {
     "check": [
+      "./bin/graviton-validate-schema",
       "./vendor/bin/phpcs --config-set installed_paths ../../libgraviton/codesniffer/CodeSniffer/Standards",
       "./vendor/bin/phpcs --standard=PSR1 src/",
       "./vendor/bin/phpcs --standard=PSR2 src/",
