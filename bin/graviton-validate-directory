@@ -1,0 +1,39 @@
+#!/usr/bin/env php
+<?php
+namespace Graviton\JsonSchemaBin;
+
+use Graviton\JsonSchemaBundle\Command\ValidateDirectoryCommand;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\InputInterface;
+
+require __DIR__.'/init.php';
+
+
+class ValidateDirectoryApplication extends Application
+{
+    protected function getCommandName(InputInterface $input)
+    {
+        return 'validate';
+    }
+
+    protected function getDefaultCommands()
+    {
+        $schema = 'file://'.__DIR__.'/../src/Graviton/JsonSchemaBundle/Resources/schema/loadconfig/v1.0/schema.json';
+
+        $command = new ValidateDirectoryCommand('validate');
+        $command->setValidator(getJsonValidator($schema));
+
+        return [$command];
+    }
+
+    public function getDefinition()
+    {
+        $inputDefinition = parent::getDefinition();
+        $inputDefinition->setArguments([]);
+
+        return $inputDefinition;
+    }
+}
+
+$application = new ValidateDirectoryApplication('Graviton JSON schema validator', '1.0');
+$application->run();

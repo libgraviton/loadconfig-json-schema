@@ -1,0 +1,59 @@
+#!/usr/bin/env php
+<?php
+namespace Graviton\JsonSchemaBin;
+
+use Graviton\JsonSchemaBundle\Command\AbstractValidateCommand;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
+
+require __DIR__.'/init.php';
+
+class ValidateSchemaCommand extends AbstractValidateCommand
+{
+    /**
+     * Load JSON definitions
+     *
+     * @param InputInterface $input Command input
+     * @return SplFileInfo[]
+     */
+    protected function loadDefinitions(InputInterface $input)
+    {
+        $finder = (new Finder())
+            ->files()
+            ->in(__DIR__.'/../src/Graviton/JsonSchemaBundle/Resources/schema')
+            ->name('*.json');
+        return iterator_to_array($finder);
+    }
+}
+
+class ValidateSchemaApplication extends Application
+{
+    protected function getCommandName(InputInterface $input)
+    {
+        return 'validate';
+    }
+
+    protected function getDefaultCommands()
+    {
+        $schema = 'http://json-schema.org/draft-04/schema#';
+
+        $command = new ValidateSchemaCommand('validate');
+        $command->setValidator(getJsonValidator($schema));
+
+        return [$command];
+    }
+
+    public function getDefinition()
+    {
+        $inputDefinition = parent::getDefinition();
+        $inputDefinition->setArguments([]);
+        $inputDefinition->setOptions([]);
+
+        return $inputDefinition;
+    }
+}
+
+$application = new ValidateSchemaApplication('Graviton JSON schema validator', '1.0');
+$application->run();
