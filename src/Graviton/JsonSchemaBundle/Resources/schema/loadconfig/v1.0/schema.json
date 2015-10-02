@@ -167,6 +167,10 @@
           "items": {
             "$ref": "#/definitions/serviceFixture"
           }
+        },
+        "collectionName": {
+          "title": "Collection name",
+          "$ref": "#/definitions/collectionName"
         }
       },
       "additionalProperties": false
