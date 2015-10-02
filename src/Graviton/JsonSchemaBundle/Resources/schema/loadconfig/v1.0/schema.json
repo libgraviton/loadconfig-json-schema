@@ -18,7 +18,7 @@
     },
     "fieldDefinitionName": {
       "type": "string",
-      "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*(\\.(0\\.)?[a-zA-Z_][a-zA-Z0-9_]*)*$"
+      "pattern": "^[a-zA-Z_]\\w*(?:\\.(?:0\\.)?[a-zA-Z_]\\w*)*(?:\\.0)?$"
     },
     "fieldBasicType": {
       "enum": [
@@ -347,7 +347,7 @@
         "x-dynamic-key": {
           "title": "Dynamic Key Specification",
           "description": "Use this if you need to expose array objects as an object using parts of the object as key. Gets transported into internal graviton schemas as a whole if specified.",
-          "$ref": "#/definition/xDynamicKey"
+          "$ref": "#/definitions/xDynamicKey"
         }
       },
       "required": [
