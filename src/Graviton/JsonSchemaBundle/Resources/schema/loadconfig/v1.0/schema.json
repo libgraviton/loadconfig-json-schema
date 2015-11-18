@@ -411,16 +411,16 @@
           "description": "Method that is to be called on the document repository corresponding to the given document-id.",
           "type": "string"
         },
-        "ref-method": {
-          "title": "Ref Method",
-          "description": "What method to call on a document to find out what it's key should be when it needs to be exposed as object (ie. using additionalProperties) on it's parent. Graviton currently uses the id from the results of this call as key",
+        "ref-field": {
+          "title": "Ref Field",
+          "description": "Which field in a document to find out what it's key should be when it needs to be exposed as object (ie. using additionalProperties) on it's parent. if it's nested just seperate the fields by a period. E.g. lvl1.lvl2.lvl3. Graviton currently uses the id from the results of this call as key",
           "type": "string"
         }
       },
       "required": [
         "document-id",
         "repository-method",
-        "ref-method"
+        "ref-field"
       ]
     }
   }
