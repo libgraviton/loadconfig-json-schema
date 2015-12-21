@@ -269,7 +269,7 @@
         },
         "localValueField": {
           "title": "Local value field",
-          "$ref": "#/definitions/fieldName"
+          "$ref": "#/definitions/fieldDefinitionName"
         },
         "foreignProperty": {
           "title": "Foreign relation field",
