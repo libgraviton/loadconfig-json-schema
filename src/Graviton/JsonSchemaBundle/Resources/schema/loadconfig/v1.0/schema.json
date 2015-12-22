@@ -92,6 +92,10 @@
           "title": "Definition description",
           "type": "string"
         },
+        "jsonRestSource": {
+          "title": "Optional JSON REST based source",
+          "type": "string"
+        },
         "service": {
           "title": "Service definition",
           "$ref": "#/definitions/service"
