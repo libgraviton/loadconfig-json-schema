@@ -94,6 +94,7 @@
         },
         "jsonRestSource": {
           "title": "Optional JSON REST based source",
+          "description": "Changes the load behavior of a ml3k LoadConfigObject load to a JSON REST based source as specified in this field, overriding the normal behavior.",
           "type": "string"
         },
         "service": {
