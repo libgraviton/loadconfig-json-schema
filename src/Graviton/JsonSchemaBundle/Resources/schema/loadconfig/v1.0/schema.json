@@ -92,6 +92,11 @@
           "title": "Definition description",
           "type": "string"
         },
+        "jsonRestSource": {
+          "title": "Optional JSON REST based source",
+          "description": "Changes the load behavior of a ml3k LoadConfigObject load to a JSON REST based source as specified in this field, overriding the normal behavior.",
+          "type": "string"
+        },
         "service": {
           "title": "Service definition",
           "$ref": "#/definitions/service"
@@ -269,7 +274,7 @@
         },
         "localValueField": {
           "title": "Local value field",
-          "$ref": "#/definitions/fieldName"
+          "$ref": "#/definitions/fieldDefinitionName"
         },
         "foreignProperty": {
           "title": "Foreign relation field",
