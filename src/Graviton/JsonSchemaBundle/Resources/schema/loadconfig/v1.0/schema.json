@@ -357,6 +357,10 @@
           "title": "Dynamic Key Specification",
           "description": "Use this if you need to expose array objects as an object using parts of the object as key. Gets transported into internal graviton schemas as a whole if specified.",
           "$ref": "#/definitions/xDynamicKey"
+        },
+        "searchable": {
+          "title": "Can the defined field be searched by search RQL term",
+          "type": "boolean"
         }
       },
       "required": [
