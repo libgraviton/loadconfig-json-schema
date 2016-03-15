@@ -97,6 +97,19 @@
           "description": "Changes the load behavior of a ml3k LoadConfigObject load to a JSON REST based source as specified in this field, overriding the normal behavior.",
           "type": "string"
         },
+        "jsonRestRecordParam": {
+          "title": "GET param used for requesting specific documents",
+          "description": "This is used as part of the URL used when requesting specific versions of ie. /service?<value of property>=1,2,3",
+          "type": "string"
+        },
+        "recordIds": {
+          "title": "Specify what records to load",
+          "description": "When specified the loader will only load the given records from the backend. It will use the jsonRestRecordParam field to decide how URLs to the single records should be built.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "service": {
           "title": "Service definition",
           "$ref": "#/definitions/service"
