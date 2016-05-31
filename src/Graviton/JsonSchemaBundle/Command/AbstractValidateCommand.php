@@ -7,7 +7,6 @@ namespace Graviton\JsonSchemaBundle\Command;
 
 use Graviton\JsonSchemaBundle\Exception\ValidationExceptionError;
 use Graviton\JsonSchemaBundle\Validator\ValidatorInterface;
-use HadesArchitect\JsonSchemaBundle\Error\Error;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;

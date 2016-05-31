@@ -14,7 +14,6 @@
   },
   "require": {
     "symfony/symfony": "^2.8.6",
-    "hadesarchitect/json-schema-bundle": "~0.1.0",
     "justinrainbow/json-schema": "~2.0"
   },
   "require-dev": {
