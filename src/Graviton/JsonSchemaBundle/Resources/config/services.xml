@@ -15,7 +15,7 @@
         <service id="graviton.jsonschema.schema.resolver"
                  class="%graviton.jsonschema.schema.resolver.class%"
                  public="false">
-            <argument type="service" id="json_schema.uri_retriever"/>
+            <argument type="service" id="hades.json_schema.uri_retriever"/>
         </service>
         <service id="graviton.jsonschema.schema.factory"
                  class="%graviton.jsonschema.schema.factory.class%"
@@ -31,7 +31,7 @@
         <!-- validator -->
         <service id="graviton.jsonschema.validator"
                  class="%graviton.jsonschema.validator.class%">
-            <argument type="service" id="json_schema.validator"/>
+            <argument type="service" id="hades.json_schema.validator"/>
             <argument type="service" id="graviton.jsonschema.schema.data"/>
         </service>
 
