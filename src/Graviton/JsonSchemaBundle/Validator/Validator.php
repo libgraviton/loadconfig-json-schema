@@ -54,8 +54,21 @@ class Validator implements ValidatorInterface
             throw new InvalidJsonException('JSON value must be an object');
         }
 
+        return $this->validate($json, $this->schema);
+    }
+
+    /**
+     * validate a json structure with a schema
+     *
+     * @param object $json   the json
+     * @param object $schema the schema
+     *
+     * @return ValidationExceptionError[] errors
+     */
+    public function validate($json, $schema)
+    {
         $this->validator->reset();
-        $this->validator->check($json, $this->schema);
+        $this->validator->check($json, $schema);
 
         if ($this->validator->isValid()) {
             return [];
