@@ -4,10 +4,15 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="graviton.jsonschema.schema.factory.class">Graviton\JsonSchemaBundle\Schema\SchemaFactory</parameter>
-        <parameter key="graviton.jsonschema.schema.resolver.class">Graviton\JsonSchemaBundle\Schema\RefResolver</parameter>
+        <parameter key="graviton.jsonschema.schema.resolver.class">JsonSchema\RefResolver</parameter>
+
+        <parameter key="graviton.jsonschema.resolver.uri_retriever.class">JsonSchema\Uri\UriRetriever</parameter>
+        <parameter key="graviton.jsonschema.resolver.uri_resolver.class">JsonSchema\Uri\UriResolver</parameter>
+
         <parameter key="graviton.jsonschema.schema.uri"/>
 
         <parameter key="graviton.jsonschema.validator.class">Graviton\JsonSchemaBundle\Validator\Validator</parameter>
+        <parameter key="graviton.jsonschema.validator.validator.class">JsonSchema\Validator</parameter>
     </parameters>
 
     <services>
@@ -15,8 +20,18 @@
         <service id="graviton.jsonschema.schema.resolver"
                  class="%graviton.jsonschema.schema.resolver.class%"
                  public="false">
-            <argument type="service" id="hades.json_schema.uri_retriever"/>
+            <argument type="service" id="graviton.jsonschema.schema.resolver.uri_retriever"/>
+            <argument type="service" id="graviton.jsonschema.schema.resolver.uri_resolver"/>
         </service>
+        <service id="graviton.jsonschema.schema.resolver.uri_resolver"
+                 class="%graviton.jsonschema.resolver.uri_resolver.class%"
+                 public="false">
+        </service>
+        <service id="graviton.jsonschema.schema.resolver.uri_retriever"
+                 class="%graviton.jsonschema.resolver.uri_retriever.class%"
+                 public="false">
+        </service>
+
         <service id="graviton.jsonschema.schema.factory"
                  class="%graviton.jsonschema.schema.factory.class%"
                  public="false">
@@ -31,8 +46,12 @@
         <!-- validator -->
         <service id="graviton.jsonschema.validator"
                  class="%graviton.jsonschema.validator.class%">
-            <argument type="service" id="hades.json_schema.validator"/>
+            <argument type="service" id="graviton.jsonschema.validator.validator"/>
             <argument type="service" id="graviton.jsonschema.schema.data"/>
+        </service>
+        <!-- subvalidator (what we wrap) -->
+        <service id="graviton.jsonschema.validator.validator"
+                 class="%graviton.jsonschema.validator.validator.class%">
         </service>
 
         <!-- commands -->
