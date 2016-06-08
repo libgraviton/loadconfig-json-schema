@@ -11,6 +11,9 @@
 
         <parameter key="graviton.jsonschema.schema.uri"/>
 
+        <parameter key="graviton.jsonschema.validator.constraint.format.class">Graviton\JsonSchemaBundle\Validator\Constraint\Format</parameter>
+        <parameter key="graviton.jsonschema.validator.constraint.factory.class">Graviton\JsonSchemaBundle\Validator\Constraint\Factory</parameter>
+
         <parameter key="graviton.jsonschema.validator.class">Graviton\JsonSchemaBundle\Validator\Validator</parameter>
         <parameter key="graviton.jsonschema.validator.validator.class">JsonSchema\Validator</parameter>
     </parameters>
@@ -49,9 +52,21 @@
             <argument type="service" id="graviton.jsonschema.validator.validator"/>
             <argument type="service" id="graviton.jsonschema.schema.data"/>
         </service>
+
+        <!-- validator factory -->
+        <service id="graviton.jsonschema.validator.constraint.factory"
+                 class="%graviton.jsonschema.validator.constraint.factory.class%">
+            <call method="setConstraintClass">
+                <argument>format</argument>
+                <argument>%graviton.jsonschema.validator.constraint.format.class%</argument>
+            </call>
+        </service>
+
         <!-- subvalidator (what we wrap) -->
-        <service id="graviton.jsonschema.validator.validator"
-                 class="%graviton.jsonschema.validator.validator.class%">
+        <service id="graviton.jsonschema.validator.validator" class="%graviton.jsonschema.validator.validator.class%">
+            <factory service="graviton.jsonschema.validator.constraint.factory" method="createInstanceFor" />
+            <argument>validator</argument>
+            <argument type="service" id="event_dispatcher"/>
         </service>
 
         <!-- commands -->
