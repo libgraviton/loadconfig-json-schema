@@ -5,7 +5,7 @@
 
 namespace Graviton\JsonSchemaBundle\Validator\Constraint;
 
-use JsonSchema\Constraints\Factory;
+use JsonSchema\Constraints\Factory as CustomFactory;
 use JsonSchema\Constraints\FormatConstraint;
 use Graviton\JsonSchemaBundle\Validator\Constraint\Event\ConstraintEventFormat;
 use JsonSchema\Uri\UriRetriever;
@@ -25,21 +25,21 @@ class Format extends FormatConstraint
     private $dispatcher;
 
     /**
-     * @var Factory
+     * @var CustomFactory
      */
     private $factory;
 
     /**
      * Format constructor.
      *
-     * @param int               $checkMode    check mode
-     * @param UriRetriever|null $uriRetriever uri retriever
-     * @param Factory|null      $factory      factory
+     * @param int                $checkMode    check mode
+     * @param UriRetriever|null  $uriRetriever uri retriever
+     * @param CustomFactory|null $factory      factory
      */
     public function __construct(
         $checkMode = self::CHECK_MODE_NORMAL,
         UriRetriever $uriRetriever = null,
-        Factory $factory = null
+        CustomFactory $factory = null
     ) {
         parent::__construct($checkMode, $uriRetriever, $factory);
         $this->factory = $factory;
