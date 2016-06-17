@@ -1,18 +1,18 @@
 <?php
 /**
- * custom format constraint
+ * custom object constraint
  */
 
 namespace Graviton\JsonSchemaBundle\Validator\Constraint;
 
-use JsonSchema\Constraints\FormatConstraint;
+use JsonSchema\Constraints\ObjectConstraint;
 
 /**
  * @author   List of contributors <https://github.com/libgraviton/graviton/graphs/contributors>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link     http://swisscom.ch
  */
-class Format extends FormatConstraint
+class Object extends ObjectConstraint
 {
 
     /**
@@ -20,7 +20,7 @@ class Format extends FormatConstraint
      *
      * @var string
      */
-    protected $eventClass = 'Graviton\JsonSchemaBundle\Validator\Constraint\Event\ConstraintEventFormat';
+    protected $eventClass = 'Graviton\JsonSchemaBundle\Validator\Constraint\Event\ConstraintEventObject';
 
     use ConstraintTrait;
 }
