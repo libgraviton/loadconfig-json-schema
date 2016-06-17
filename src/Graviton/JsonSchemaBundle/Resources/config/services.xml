@@ -11,9 +11,11 @@
 
         <parameter key="graviton.jsonschema.schema.uri"/>
 
+        <parameter key="graviton.jsonschema.validator.constraint.factory.class">Graviton\JsonSchemaBundle\Validator\Constraint\Factory</parameter>
+
+        <parameter key="graviton.jsonschema.validator.constraint.schema.class">Graviton\JsonSchemaBundle\Validator\Constraint\Schema</parameter>
         <parameter key="graviton.jsonschema.validator.constraint.format.class">Graviton\JsonSchemaBundle\Validator\Constraint\Format</parameter>
         <parameter key="graviton.jsonschema.validator.constraint.object.class">Graviton\JsonSchemaBundle\Validator\Constraint\Object</parameter>
-        <parameter key="graviton.jsonschema.validator.constraint.factory.class">Graviton\JsonSchemaBundle\Validator\Constraint\Factory</parameter>
 
         <parameter key="graviton.jsonschema.validator.class">Graviton\JsonSchemaBundle\Validator\Validator</parameter>
         <parameter key="graviton.jsonschema.validator.validator.class">JsonSchema\Validator</parameter>
@@ -58,12 +60,16 @@
         <service id="graviton.jsonschema.validator.constraint.factory"
                  class="%graviton.jsonschema.validator.constraint.factory.class%">
             <call method="setConstraintClass">
-                <argument>format</argument>
-                <argument>%graviton.jsonschema.validator.constraint.format.class%</argument>
+                <argument>schema</argument>
+                <argument>%graviton.jsonschema.validator.constraint.schema.class%</argument>
             </call>
             <call method="setConstraintClass">
                 <argument>object</argument>
                 <argument>%graviton.jsonschema.validator.constraint.object.class%</argument>
+            </call>
+            <call method="setConstraintClass">
+                <argument>format</argument>
+                <argument>%graviton.jsonschema.validator.constraint.format.class%</argument>
             </call>
         </service>
 
