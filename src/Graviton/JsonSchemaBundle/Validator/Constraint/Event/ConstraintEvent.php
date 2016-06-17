@@ -105,14 +105,15 @@ class ConstraintEvent extends Event
      * add an error message
      *
      * @param string $errorMessage message
+     * @param string $propertyPath property path
      * @param string $constraint   constraint
      *
      * @return void
      */
-    public function addError($errorMessage, $constraint = '')
+    public function addError($errorMessage, $propertyPath = null, $constraint = '')
     {
         $this->errors[] = [
-            'property' => $this->getPath(),
+            'property' => (is_null($propertyPath) ? $this->getPath() : $propertyPath),
             'message' => $errorMessage,
             'constraint' => $constraint
         ];
