@@ -69,9 +69,27 @@ trait ConstraintTrait
     {
         parent::check($element, $schema, $path, $i);
 
-        $event = new $this->eventClass($this->factory, $element, $schema, $path);
+        $eventClass = $this->getEventClass();
+
+        $event = new $eventClass($this->factory, $element, $schema, $path);
         $result = $this->dispatcher->dispatch($event::NAME, $event);
 
         $this->addErrors($result->getErrors());
     }
+
+    /**
+     * Returns the name of the Event class for this event
+     *
+     * @return string event class name
+     */
+    abstract public function getEventClass();
+
+    /**
+     * Adds errors
+     *
+     * @param array $errors errors
+     *
+     * @return void
+     */
+    abstract public function addErrors(array $errors);
 }

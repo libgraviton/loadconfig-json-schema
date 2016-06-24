@@ -15,12 +15,22 @@ use JsonSchema\Constraints\SchemaConstraint;
 class Schema extends SchemaConstraint
 {
 
+    use ConstraintTrait;
+
     /**
      * class of the event
      *
      * @var string
      */
-    protected $eventClass = 'Graviton\JsonSchemaBundle\Validator\Constraint\Event\ConstraintEventSchema';
+    private $eventClass = 'Graviton\JsonSchemaBundle\Validator\Constraint\Event\ConstraintEventSchema';
 
-    use ConstraintTrait;
+    /**
+     * Returns the name of the Event class for this event
+     *
+     * @return string event class name
+     */
+    public function getEventClass()
+    {
+        return $this->eventClass;
+    }
 }
