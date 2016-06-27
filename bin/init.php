@@ -2,9 +2,7 @@
 namespace Graviton\JsonSchemaBin;
 
 use Graviton\JsonSchemaBundle\Schema\SchemaFactory;
-use Graviton\JsonSchemaBundle\Schema\RefResolver;
 use Graviton\JsonSchemaBundle\Validator\Validator;
-use HadesArchitect\JsonSchemaBundle\Validator\ValidatorService;
 
 if (!ini_get('date.timezone')) {
     ini_set('date.timezone', 'UTC');
@@ -28,9 +26,13 @@ function getAutoloadFile()
 }
 function getJsonValidator($uri)
 {
+    $factory = new SchemaFactory(
+        new \JsonSchema\RefResolver(new \JsonSchema\Uri\UriRetriever(), new \JsonSchema\Uri\UriResolver())
+    );
+
     return new Validator(
-        new ValidatorService('JsonSchema\Validator'),
-        (new SchemaFactory(new RefResolver()))->createSchema($uri)
+        new \JsonSchema\Validator(),
+        $factory->createSchema($uri)
     );
 }
 

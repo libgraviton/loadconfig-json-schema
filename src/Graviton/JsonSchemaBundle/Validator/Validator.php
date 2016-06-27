@@ -5,8 +5,7 @@
 
 namespace Graviton\JsonSchemaBundle\Validator;
 
-use HadesArchitect\JsonSchemaBundle\Error\Error;
-use HadesArchitect\JsonSchemaBundle\Validator\ValidatorServiceInterface;
+use Graviton\JsonSchemaBundle\Exception\ValidationExceptionError;
 
 /**
  * JSON definition validation
@@ -22,17 +21,17 @@ class Validator implements ValidatorInterface
      */
     private $schema;
     /**
-     * @var ValidatorServiceInterface Validator
+     * @var Validator Validator
      */
     private $validator;
 
     /**
      * Constructor
      *
-     * @param ValidatorServiceInterface $validator Validator
-     * @param \stdClass                 $schema    JSON schema
+     * @param Validator $validator Validator
+     * @param \stdClass $schema    JSON schema
      */
-    public function __construct(ValidatorServiceInterface $validator, \stdClass $schema)
+    public function __construct($validator, $schema)
     {
         $this->validator = $validator;
         $this->schema = $schema;
@@ -42,7 +41,7 @@ class Validator implements ValidatorInterface
      * Validate raw JSON definition
      *
      * @param string $json JSON definition
-     * @return Error[]
+     * @return ValidationExceptionError[]
      * @throws InvalidJsonException If JSON is not valid
      */
     public function validateJsonDefinition($json)
@@ -55,11 +54,41 @@ class Validator implements ValidatorInterface
             throw new InvalidJsonException('JSON value must be an object');
         }
 
-        if ($this->validator->isValid($json, $this->schema)) {
+        return $this->validate($json, $this->schema);
+    }
+
+    /**
+     * validate a json structure with a schema
+     *
+     * @param object $json   the json
+     * @param object $schema the schema
+     *
+     * @return ValidationExceptionError[] errors
+     */
+    public function validate($json, $schema)
+    {
+        $this->validator->reset();
+        $this->validator->check($json, $schema);
+
+        if ($this->validator->isValid()) {
             return [];
         }
 
-        return $this->validator->getErrors();
+        return $this->getErrors();
+    }
+
+    /**
+     * Wraps the array exception in our own class
+     *
+     * @return ValidationExceptionError[]
+     */
+    public function getErrors()
+    {
+        $errors = [];
+        foreach ($this->validator->getErrors() as $error) {
+            $errors[] = new ValidationExceptionError($error);
+        }
+        return $errors;
     }
 
     /**

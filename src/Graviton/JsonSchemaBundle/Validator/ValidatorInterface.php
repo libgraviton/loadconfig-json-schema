@@ -5,8 +5,6 @@
 
 namespace Graviton\JsonSchemaBundle\Validator;
 
-use HadesArchitect\JsonSchemaBundle\Error\Error;
-
 /**
  * JSON definition validation interface
  *

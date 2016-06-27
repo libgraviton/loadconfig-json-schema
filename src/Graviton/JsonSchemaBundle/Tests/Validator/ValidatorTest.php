@@ -5,6 +5,7 @@
 
 namespace Graviton\JsonSchemaBundle\Tests\Validator;
 
+use Graviton\JsonSchemaBundle\Exception\ValidationExceptionError;
 use Graviton\JsonSchemaBundle\Validator\Validator;
 
 /**
@@ -28,7 +29,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $schema = new \stdClass();
         $json = '[}';
 
-        $validator = $this->getMockBuilder('HadesArchitect\JsonSchemaBundle\Validator\ValidatorServiceInterface')
+        $validator = $this->getMockBuilder('JsonSchema\Validator')
             ->disableOriginalConstructor()
             ->getMock();
         $validator->expects($this->never())
@@ -54,7 +55,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $schema = new \stdClass();
         $json = '[]';
 
-        $validator = $this->getMockBuilder('HadesArchitect\JsonSchemaBundle\Validator\ValidatorServiceInterface')
+        $validator = $this->getMockBuilder('JsonSchema\Validator')
             ->disableOriginalConstructor()
             ->getMock();
         $validator->expects($this->never())
@@ -77,23 +78,27 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $schema = new \stdClass();
         $json = '{"a":"b"}';
-        $errors = [__METHOD__];
+        $errors = [['message' => 'error']];
+        $returnErrors = [new ValidationExceptionError($errors[0])];
 
-        $validator = $this->getMockBuilder('HadesArchitect\JsonSchemaBundle\Validator\ValidatorServiceInterface')
+        $validator = $this->getMockBuilder('JsonSchema\Validator')
             ->disableOriginalConstructor()
             ->getMock();
         $validator->expects($this->once())
             ->method('isValid')
-            ->with(json_decode($json), $schema)
             ->willReturn(false);
         $validator->expects($this->once())
             ->method('getErrors')
             ->willReturn($errors);
-        $validator->expects($this->never())
-            ->method('check');
+        $validator->expects($this->once())
+                  ->method('reset')
+                  ->willReturn(true);
+        $validator->expects($this->once())
+            ->method('check')
+            ->with(json_decode($json), $schema);
 
         $sut = new Validator($validator, $schema);
-        $this->assertEquals($errors, $sut->validateJsonDefinition($json));
+        $this->assertEquals($returnErrors, $sut->validateJsonDefinition($json));
     }
 
 
@@ -107,17 +112,18 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $schema = new \stdClass();
         $json = '{"a":"b"}';
 
-        $validator = $this->getMockBuilder('HadesArchitect\JsonSchemaBundle\Validator\ValidatorServiceInterface')
+        $validator = $this->getMockBuilder('JsonSchema\Validator')
             ->disableOriginalConstructor()
             ->getMock();
         $validator->expects($this->once())
-            ->method('isValid')
+            ->method('check')
             ->with(json_decode($json), $schema)
             ->willReturn(true);
+        $validator->expects($this->once())
+                  ->method('isValid')
+                  ->willReturn(true);
         $validator->expects($this->never())
             ->method('getErrors');
-        $validator->expects($this->never())
-            ->method('check');
 
         $sut = new Validator($validator, $schema);
         $this->assertEquals([], $sut->validateJsonDefinition($json));

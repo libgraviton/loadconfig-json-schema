@@ -26,23 +26,13 @@ class SchemaFactoryTest extends \PHPUnit_Framework_TestCase
         $uri = __METHOD__;
         $schema = (object) [__METHOD__ => __LINE__];
 
-        $retriever = $this->getMockBuilder('HadesArchitect\JsonSchemaBundle\Uri\UriRetrieverServiceInterface')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $retriever->expects($this->once())
-            ->method('retrieve')
-            ->with($uri)
-            ->willReturn($schema);
-
         $resolver = $this->getMockBuilder('JsonSchema\RefResolver')
             ->disableOriginalConstructor()
             ->getMock();
         $resolver->expects($this->once())
-            ->method('getUriRetriever')
-            ->willReturn($retriever);
-        $resolver->expects($this->once())
             ->method('resolve')
-            ->with($schema, $uri);
+            ->with($uri)
+            ->willReturn($schema);
 
         $this->assertEquals(
             $schema,
