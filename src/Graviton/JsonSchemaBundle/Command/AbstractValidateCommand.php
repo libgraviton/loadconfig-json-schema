@@ -5,8 +5,8 @@
 
 namespace Graviton\JsonSchemaBundle\Command;
 
+use Graviton\JsonSchemaBundle\Exception\ValidationExceptionError;
 use Graviton\JsonSchemaBundle\Validator\ValidatorInterface;
-use HadesArchitect\JsonSchemaBundle\Error\Error;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
@@ -76,23 +76,23 @@ abstract class AbstractValidateCommand extends Command
      * Validate JSON definition
      *
      * @param string $json JSON definition
-     * @return Error[]
+     * @return ValidationExceptionError[]
      */
     protected function validateJsonDefinitionFile($json)
     {
         try {
             return $this->validator->validateJsonDefinition($json);
         } catch (\Exception $e) {
-            return [new Error('', $e->getMessage())];
+            return [new ValidationExceptionError(['message' => $e->getMessage()])];
         }
     }
 
     /**
      * Convert errors to table rows
      *
-     * @param OutputInterface $output   Output
-     * @param SplFileInfo     $fileInfo File info
-     * @param Error[]         $errors   Errors
+     * @param OutputInterface            $output   Output
+     * @param SplFileInfo                $fileInfo File info
+     * @param ValidationExceptionError[] $errors   Errors
      * @return void
      */
     protected function outputErrors(OutputInterface $output, SplFileInfo $fileInfo, array $errors)
@@ -102,7 +102,7 @@ abstract class AbstractValidateCommand extends Command
             $rows[] = new TableSeparator();
             $rows[] = [
                 $error->getProperty(),
-                wordwrap($error->getViolation(), 80, PHP_EOL, false),
+                wordwrap($error->getMessage(), 80, PHP_EOL, false),
             ];
         }
         array_shift($rows);

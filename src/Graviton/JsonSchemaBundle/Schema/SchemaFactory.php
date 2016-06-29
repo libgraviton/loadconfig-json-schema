@@ -38,16 +38,6 @@ class SchemaFactory
      */
     public function createSchema($uri)
     {
-        $resolver = $this->refResolver;
-
-        $prevDepth = $resolver::$maxDepth;
-        $resolver::$maxDepth = PHP_INT_MAX;
-
-        $schema = $resolver->getUriRetriever()->retrieve($uri);
-        $resolver->resolve($schema, $uri);
-
-        $resolver::$maxDepth = $prevDepth;
-
-        return $schema;
+        return $this->refResolver->resolve($uri);
     }
 }

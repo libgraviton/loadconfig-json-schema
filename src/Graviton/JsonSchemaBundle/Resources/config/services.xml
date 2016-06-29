@@ -4,10 +4,21 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="graviton.jsonschema.schema.factory.class">Graviton\JsonSchemaBundle\Schema\SchemaFactory</parameter>
-        <parameter key="graviton.jsonschema.schema.resolver.class">Graviton\JsonSchemaBundle\Schema\RefResolver</parameter>
+        <parameter key="graviton.jsonschema.schema.resolver.class">JsonSchema\RefResolver</parameter>
+
+        <parameter key="graviton.jsonschema.resolver.uri_retriever.class">JsonSchema\Uri\UriRetriever</parameter>
+        <parameter key="graviton.jsonschema.resolver.uri_resolver.class">JsonSchema\Uri\UriResolver</parameter>
+
         <parameter key="graviton.jsonschema.schema.uri"/>
 
+        <parameter key="graviton.jsonschema.validator.constraint.factory.class">Graviton\JsonSchemaBundle\Validator\Constraint\Factory</parameter>
+
+        <parameter key="graviton.jsonschema.validator.constraint.schema.class">Graviton\JsonSchemaBundle\Validator\Constraint\Schema</parameter>
+        <parameter key="graviton.jsonschema.validator.constraint.format.class">Graviton\JsonSchemaBundle\Validator\Constraint\Format</parameter>
+        <parameter key="graviton.jsonschema.validator.constraint.object.class">Graviton\JsonSchemaBundle\Validator\Constraint\Object</parameter>
+
         <parameter key="graviton.jsonschema.validator.class">Graviton\JsonSchemaBundle\Validator\Validator</parameter>
+        <parameter key="graviton.jsonschema.validator.validator.class">JsonSchema\Validator</parameter>
     </parameters>
 
     <services>
@@ -15,25 +26,58 @@
         <service id="graviton.jsonschema.schema.resolver"
                  class="%graviton.jsonschema.schema.resolver.class%"
                  public="false">
-            <argument type="service" id="json_schema.uri_retriever"/>
+            <argument type="service" id="graviton.jsonschema.schema.resolver.uri_retriever"/>
+            <argument type="service" id="graviton.jsonschema.schema.resolver.uri_resolver"/>
         </service>
+        <service id="graviton.jsonschema.schema.resolver.uri_resolver"
+                 class="%graviton.jsonschema.resolver.uri_resolver.class%"
+                 public="false">
+        </service>
+        <service id="graviton.jsonschema.schema.resolver.uri_retriever"
+                 class="%graviton.jsonschema.resolver.uri_retriever.class%"
+                 public="false">
+        </service>
+
         <service id="graviton.jsonschema.schema.factory"
                  class="%graviton.jsonschema.schema.factory.class%"
                  public="false">
             <argument type="service" id="graviton.jsonschema.schema.resolver"/>
         </service>
         <service id="graviton.jsonschema.schema.data"
-                 class="stdClass"
-                 factory-service="graviton.jsonschema.schema.factory"
-                 factory-method="createSchema">
+            class="stdClass">
+            <factory service="graviton.jsonschema.schema.factory" method="createSchema"/>
             <argument>%graviton.jsonschema.schema.uri%</argument>
         </service>
 
         <!-- validator -->
         <service id="graviton.jsonschema.validator"
                  class="%graviton.jsonschema.validator.class%">
-            <argument type="service" id="json_schema.validator"/>
+            <argument type="service" id="graviton.jsonschema.validator.validator"/>
             <argument type="service" id="graviton.jsonschema.schema.data"/>
+        </service>
+
+        <!-- validator factory -->
+        <service id="graviton.jsonschema.validator.constraint.factory"
+                 class="%graviton.jsonschema.validator.constraint.factory.class%">
+            <call method="setConstraintClass">
+                <argument>schema</argument>
+                <argument>%graviton.jsonschema.validator.constraint.schema.class%</argument>
+            </call>
+            <call method="setConstraintClass">
+                <argument>object</argument>
+                <argument>%graviton.jsonschema.validator.constraint.object.class%</argument>
+            </call>
+            <call method="setConstraintClass">
+                <argument>format</argument>
+                <argument>%graviton.jsonschema.validator.constraint.format.class%</argument>
+            </call>
+        </service>
+
+        <!-- subvalidator (what we wrap) -->
+        <service id="graviton.jsonschema.validator.validator" class="%graviton.jsonschema.validator.validator.class%">
+            <factory service="graviton.jsonschema.validator.constraint.factory" method="createInstanceFor" />
+            <argument>validator</argument>
+            <argument type="service" id="event_dispatcher"/>
         </service>
 
         <!-- commands -->

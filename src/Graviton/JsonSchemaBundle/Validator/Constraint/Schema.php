@@ -1,0 +1,36 @@
+<?php
+/**
+ * custom format constraint
+ */
+
+namespace Graviton\JsonSchemaBundle\Validator\Constraint;
+
+use JsonSchema\Constraints\SchemaConstraint;
+
+/**
+ * @author   List of contributors <https://github.com/libgraviton/graviton/graphs/contributors>
+ * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @link     http://swisscom.ch
+ */
+class Schema extends SchemaConstraint
+{
+
+    use ConstraintTrait;
+
+    /**
+     * class of the event
+     *
+     * @var string
+     */
+    private $eventClass = 'Graviton\JsonSchemaBundle\Validator\Constraint\Event\ConstraintEventSchema';
+
+    /**
+     * Returns the name of the Event class for this event
+     *
+     * @return string event class name
+     */
+    public function getEventClass()
+    {
+        return $this->eventClass;
+    }
+}
