@@ -67,14 +67,14 @@ trait ConstraintTrait
      */
     public function check($element, $schema = null, $path = null, $i = null)
     {
-        parent::check($element, $schema, $path, $i);
-
         $eventClass = $this->getEventClass();
 
         $event = new $eventClass($this->factory, $element, $schema, $path);
         $result = $this->dispatcher->dispatch($event::NAME, $event);
 
         $this->addErrors($result->getErrors());
+
+        parent::check($element, $schema, $path, $i);
     }
 
     /**
