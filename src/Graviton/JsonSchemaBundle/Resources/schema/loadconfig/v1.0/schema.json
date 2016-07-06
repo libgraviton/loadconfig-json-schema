@@ -344,6 +344,10 @@
           "title": "Is field translatable",
           "type": "boolean"
         },
+        "recordOriginException": {
+          "title": "Is field an exception to the recordOrigin rule",
+          "type": "boolean"
+        },
         "constraints": {
           "title": "Field constraints",
           "type": "array",
