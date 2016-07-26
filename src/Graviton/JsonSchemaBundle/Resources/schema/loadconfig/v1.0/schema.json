@@ -236,8 +236,8 @@
           }
         },
         "textIndexes": {
-          "title": "Target Text Search Indexes, key: value for weight",
-          "type": "object",
+          "title": "Target Text Search Indexes, field and weight",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/targetTextIndex"
           }
@@ -280,20 +280,20 @@
     "targetTextIndex": {
       "type": "object",
       "properties": {
-        "name": {
+        "field": {
           "title": "Weighted key name name to be solved in Search criteria",
           "type": "string"
         },
-        "value": {
+        "weight": {
           "title": "Importance criteria",
-          "type": "integer"
+          "type": "integer",
+          "minimum": 0
         }
       },
       "required": [
-        "name",
-        "value"
-      ],
-      "additionalProperties": false
+        "field",
+        "weight"
+      ]
     },
     "targetRelation": {
       "type": "object",
