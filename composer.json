@@ -13,7 +13,7 @@
     "psr-0": {"Graviton": "src/"}
   },
   "require": {
-    "symfony/symfony": "^2.8.6",
+    "symfony/symfony": "^2.8.6 || ^3.0.7",
     "justinrainbow/json-schema": "~2.0"
   },
   "require-dev": {
