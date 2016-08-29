@@ -41,19 +41,13 @@
         <service id="graviton.jsonschema.schema.factory"
                  class="%graviton.jsonschema.schema.factory.class%"
                  public="false">
-            <argument type="service" id="graviton.jsonschema.schema.resolver"/>
-        </service>
-        <service id="graviton.jsonschema.schema.data"
-            class="stdClass">
-            <factory service="graviton.jsonschema.schema.factory" method="createSchema"/>
-            <argument>%graviton.jsonschema.schema.uri%</argument>
         </service>
 
         <!-- validator -->
         <service id="graviton.jsonschema.validator"
                  class="%graviton.jsonschema.validator.class%">
             <argument type="service" id="graviton.jsonschema.validator.validator"/>
-            <argument type="service" id="graviton.jsonschema.schema.data"/>
+            <argument>%graviton.jsonschema.schema.uri%</argument>
         </service>
 
         <!-- validator factory -->
