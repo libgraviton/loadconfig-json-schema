@@ -1,7 +1,6 @@
 <?php
 namespace Graviton\JsonSchemaBin;
 
-use Graviton\JsonSchemaBundle\Schema\SchemaFactory;
 use Graviton\JsonSchemaBundle\Validator\Validator;
 
 if (!ini_get('date.timezone')) {
@@ -26,13 +25,9 @@ function getAutoloadFile()
 }
 function getJsonValidator($uri)
 {
-    $factory = new SchemaFactory(
-        new \JsonSchema\RefResolver(new \JsonSchema\Uri\UriRetriever(), new \JsonSchema\Uri\UriResolver())
-    );
-
     return new Validator(
         new \JsonSchema\Validator(),
-        $factory->createSchema($uri)
+        (object) ['$ref' => $uri]
     );
 }
 

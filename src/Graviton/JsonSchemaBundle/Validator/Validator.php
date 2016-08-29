@@ -17,7 +17,7 @@ use Graviton\JsonSchemaBundle\Exception\ValidationExceptionError;
 class Validator implements ValidatorInterface
 {
     /**
-     * @var \stdClass JSON schema
+     * @var string JSON schema location
      */
     private $schema;
     /**
@@ -29,7 +29,7 @@ class Validator implements ValidatorInterface
      * Constructor
      *
      * @param Validator $validator Validator
-     * @param \stdClass $schema    JSON schema
+     * @param string    $schema    JSON schema
      */
     public function __construct($validator, $schema)
     {
@@ -68,7 +68,11 @@ class Validator implements ValidatorInterface
     public function validate($json, $schema)
     {
         $this->validator->reset();
-        $this->validator->check($json, $schema);
+        if (is_string($schema)) {
+            $this->validator->check($json, (object) ['$ref' => $schema]);
+        } else {
+            $this->validator->check($json, $schema);
+        }
 
         if ($this->validator->isValid()) {
             return [];
