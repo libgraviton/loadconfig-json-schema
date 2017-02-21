@@ -151,6 +151,10 @@
           "title": "Is service read-only",
           "type": "boolean"
         },
+        "versioning": {
+          "title": "Is service version controlled, default false.",
+          "type": "boolean"
+        },
         "recordOriginModifiable": {
           "title": "Can record origin be modified",
           "type": "boolean"
