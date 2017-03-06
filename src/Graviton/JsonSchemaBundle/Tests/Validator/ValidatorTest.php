@@ -37,7 +37,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->expects($this->never())
             ->method('getErrors');
         $validator->expects($this->never())
-            ->method('check');
+            ->method('validate');
 
         $sut = new Validator($validator, $schema);
         $this->assertEquals([], $sut->validateJsonDefinition($json));
@@ -63,7 +63,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->expects($this->never())
             ->method('getErrors');
         $validator->expects($this->never())
-            ->method('check');
+            ->method('validate');
 
         $sut = new Validator($validator, $schema);
         $this->assertEquals([], $sut->validateJsonDefinition($json));
@@ -94,7 +94,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
                   ->method('reset')
                   ->willReturn(true);
         $validator->expects($this->once())
-            ->method('check')
+            ->method('validate')
             ->with(json_decode($json), $schema);
 
         $sut = new Validator($validator, $schema);
@@ -116,7 +116,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
         $validator->expects($this->once())
-            ->method('check')
+            ->method('validate')
             ->with(json_decode($json), $schema)
             ->willReturn(true);
         $validator->expects($this->once())
