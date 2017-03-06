@@ -5,6 +5,7 @@
 
 namespace Graviton\JsonSchemaBundle\Validator\Constraint;
 
+use JsonSchema\Constraints\BaseConstraint;
 use JsonSchema\Constraints\Factory as BaseFactory;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -22,22 +23,29 @@ class Factory extends BaseFactory
     private $dispatcher = null;
 
     /**
+     * set EventDispatcher
+     *
+     * @param EventDispatcherInterface $dispatcher dispatcher
+     *
+     * @return void
+     */
+    public function setEventDispatcher($dispatcher)
+    {
+        $this->dispatcher = $dispatcher;
+    }
+
+    /**
      * Create a constraint instance for the given constraint name.
      *
-     * @param string                   $constraintName  constraint name
-     * @param EventDispatcherInterface $eventDispatcher dispatcher
+     * @param string $constraintName constraint name
      *
      * @throws InvalidArgumentException if is not possible create the constraint instance.
      *
-     * @return ConstraintInterface|ObjectConstraint instance
+     * @return BaseConstraint instance
      */
-    public function createInstanceFor($constraintName, EventDispatcherInterface $eventDispatcher = null)
+    public function createInstanceFor($constraintName)
     {
         $instance = parent::createInstanceFor($constraintName);
-
-        if (!is_null($eventDispatcher)) {
-            $this->dispatcher = $eventDispatcher;
-        }
 
         if (!is_null($this->dispatcher) && is_callable([$instance, 'setEventDispatcher'])) {
             $instance->setEventDispatcher($this->dispatcher);

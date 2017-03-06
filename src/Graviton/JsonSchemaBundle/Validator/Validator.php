@@ -69,9 +69,9 @@ class Validator implements ValidatorInterface
     {
         $this->validator->reset();
         if (is_string($schema)) {
-            $this->validator->check($json, (object) ['$ref' => $schema]);
+            $this->validator->validate($json, (object) ['$ref' => $schema]);
         } else {
-            $this->validator->check($json, $schema);
+            $this->validator->validate($json, $schema);
         }
 
         if ($this->validator->isValid()) {
