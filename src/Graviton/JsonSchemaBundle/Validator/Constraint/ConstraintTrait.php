@@ -5,10 +5,7 @@
 
 namespace Graviton\JsonSchemaBundle\Validator\Constraint;
 
-use JsonSchema\Constraints\Factory as CustomFactory;
 use JsonSchema\Entity\JsonPointer;
-use JsonSchema\SchemaStorage;
-use JsonSchema\Uri\UriRetriever;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -23,29 +20,6 @@ trait ConstraintTrait
      * @var EventDispatcherInterface
      */
     private $dispatcher;
-
-    /**
-     * @var CustomFactory
-     */
-    private $factory;
-
-    /**
-     * Format constructor.
-     *
-     * @param int                $checkMode     check mode
-     * @param SchemaStorage      $schemaStorage SchemaStorage
-     * @param UriRetriever|null  $uriRetriever  uri retriever
-     * @param CustomFactory|null $factory       factory
-     */
-    public function __construct(
-        $checkMode = self::CHECK_MODE_NORMAL,
-        SchemaStorage $schemaStorage = null,
-        UriRetriever $uriRetriever = null,
-        Factory $factory = null
-    ) {
-        parent::__construct($checkMode, $schemaStorage, $uriRetriever, $factory);
-        $this->factory = $factory;
-    }
 
     /**
      * sets the event dispatcher
@@ -69,7 +43,7 @@ trait ConstraintTrait
      *
      * @return void
      */
-    public function check($element, $schema = null, JsonPointer $path = null, $i = null)
+    public function check(&$element, $schema = null, JsonPointer $path = null, $i = null)
     {
         $eventClass = $this->getEventClass();
 
