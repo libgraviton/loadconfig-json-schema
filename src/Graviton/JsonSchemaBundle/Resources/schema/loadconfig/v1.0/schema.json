@@ -80,6 +80,11 @@
           "title": "Definition ID",
           "$ref": "#/definitions/collectionName"
         },
+        "alternateName": {
+          "title": "Alternate name",
+          "description": "If this object is derived from an external system, this would be the original name in that system.",
+          "type": "string"
+        },
         "isSubDocument": {
           "title": "Is sub-document",
           "type": "boolean"
@@ -336,6 +341,15 @@
           "title": "Field name",
           "$ref": "#/definitions/fieldDefinitionName"
         },
+        "defaultValue": {
+          "title": "Default value",
+          "type": ["string", "number", "object", "array", "boolean", "null"]
+        },
+        "alternateName": {
+          "title": "Alternate name",
+          "description": "If this field is derived from an external system, this would be the original name in that system.",
+          "type": "string"
+        },
         "type": {
           "title": "Field type",
           "oneOf": [
@@ -343,6 +357,11 @@
             {"$ref": "#/definitions/fieldUpperType"},
             {"$ref": "#/definitions/fieldClassType"}
           ]
+        },
+        "alternateType": {
+          "title": "Alternate type",
+          "description": "If this field is derived from an external system, this would be the original type in that system.",
+          "type": "string"
         },
         "exposeAs": {
           "title": "Field title",
