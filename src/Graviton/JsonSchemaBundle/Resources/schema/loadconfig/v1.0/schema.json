@@ -341,6 +341,10 @@
           "title": "Field name",
           "$ref": "#/definitions/fieldDefinitionName"
         },
+        "defaultValue": {
+          "title": "Default value",
+          "type": ["string", "number", "object", "array", "boolean", "null"]
+        },
         "alternateName": {
           "title": "Alternate name",
           "description": "If this field is derived from an external system, this would be the original name in that system.",
