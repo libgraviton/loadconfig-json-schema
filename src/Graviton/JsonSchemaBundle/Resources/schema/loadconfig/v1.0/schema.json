@@ -345,6 +345,13 @@
           "title": "Default value",
           "type": ["string", "number", "object", "array", "boolean", "null"]
         },
+        "groups": {
+          "title": "A list of groups this field belongs to. Those can be used for various purposes on the backend.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "alternateName": {
           "title": "Alternate name",
           "description": "If this field is derived from an external system, this would be the original name in that system.",
