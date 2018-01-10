@@ -5,14 +5,14 @@
 
 namespace Graviton\JsonSchemaBundle\Validator\Constraint;
 
-use JsonSchema\Constraints\SchemaConstraint;
+use JsonSchema\Constraints\FormatConstraint as BaseFormatConstraint;
 
 /**
  * @author   List of contributors <https://github.com/libgraviton/graviton/graphs/contributors>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link     http://swisscom.ch
  */
-class Schema extends SchemaConstraint
+class FormatConstraint extends BaseFormatConstraint
 {
 
     use ConstraintTrait;
@@ -22,7 +22,7 @@ class Schema extends SchemaConstraint
      *
      * @var string
      */
-    private $eventClass = 'Graviton\JsonSchemaBundle\Validator\Constraint\Event\ConstraintEventSchema';
+    private $eventClass = 'Graviton\JsonSchemaBundle\Validator\Constraint\Event\ConstraintEventFormat';
 
     /**
      * Returns the name of the Event class for this event

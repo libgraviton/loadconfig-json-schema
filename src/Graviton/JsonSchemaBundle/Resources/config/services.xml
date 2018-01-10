@@ -7,9 +7,9 @@
 
         <parameter key="graviton.jsonschema.validator.constraint.factory.class">Graviton\JsonSchemaBundle\Validator\Constraint\Factory</parameter>
 
-        <parameter key="graviton.jsonschema.validator.constraint.schema.class">Graviton\JsonSchemaBundle\Validator\Constraint\Schema</parameter>
-        <parameter key="graviton.jsonschema.validator.constraint.format.class">Graviton\JsonSchemaBundle\Validator\Constraint\Format</parameter>
-        <parameter key="graviton.jsonschema.validator.constraint.object.class">Graviton\JsonSchemaBundle\Validator\Constraint\Object</parameter>
+        <parameter key="graviton.jsonschema.validator.constraint.schema.class">Graviton\JsonSchemaBundle\Validator\Constraint\SchemaConstraint</parameter>
+        <parameter key="graviton.jsonschema.validator.constraint.format.class">Graviton\JsonSchemaBundle\Validator\Constraint\FormatConstraint</parameter>
+        <parameter key="graviton.jsonschema.validator.constraint.object.class">Graviton\JsonSchemaBundle\Validator\Constraint\ObjectConstraint</parameter>
 
         <parameter key="graviton.jsonschema.validator.class">Graviton\JsonSchemaBundle\Validator\Validator</parameter>
         <parameter key="graviton.jsonschema.validator.validator.class">JsonSchema\Validator</parameter>
