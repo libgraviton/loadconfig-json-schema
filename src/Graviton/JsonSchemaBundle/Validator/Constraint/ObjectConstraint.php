@@ -5,14 +5,14 @@
 
 namespace Graviton\JsonSchemaBundle\Validator\Constraint;
 
-use JsonSchema\Constraints\ObjectConstraint;
+use JsonSchema\Constraints\ObjectConstraint as BaseObjectConstraint;
 
 /**
  * @author   List of contributors <https://github.com/libgraviton/graviton/graphs/contributors>
  * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
  * @link     http://swisscom.ch
  */
-class Object extends ObjectConstraint
+class ObjectConstraint extends BaseObjectConstraint
 {
 
     use ConstraintTrait;

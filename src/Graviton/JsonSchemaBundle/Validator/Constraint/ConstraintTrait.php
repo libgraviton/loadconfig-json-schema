@@ -36,23 +36,29 @@ trait ConstraintTrait
     /**
      * checks the input
      *
-     * @param mixed       $element element
-     * @param null        $schema  schema
-     * @param JsonPointer $path    path
-     * @param null        $i       iterator value
+     * @param mixed       $element           element
+     * @param null        $definition        definition
+     * @param JsonPointer $path              path
+     * @param null        $additionalProp    added props
+     * @param null        $patternProperties pattern props
      *
      * @return void
      */
-    public function check(&$element, $schema = null, JsonPointer $path = null, $i = null)
-    {
+    public function check(
+        &$element,
+        $definition = null,
+        JsonPointer $path = null,
+        $additionalProp = null,
+        $patternProperties = null
+    ) {
         $eventClass = $this->getEventClass();
 
-        $event = new $eventClass($this->factory, $element, $schema, $path);
+        $event = new $eventClass($this->factory, $element, $definition, $path);
         $result = $this->dispatcher->dispatch($event::NAME, $event);
 
         $this->addErrors($result->getErrors());
 
-        parent::check($element, $schema, $path, $i);
+        parent::check($element, $definition, $path, $additionalProp, $patternProperties);
     }
 
     /**
