@@ -58,6 +58,7 @@
             </call>
         </service>
         <service id="graviton.jsonschema.command.validatedefinition.directory"
+                 public="true"
                  class="Graviton\JsonSchemaBundle\Command\ValidateDirectoryCommand"
                  parent="graviton.jsonschema.command.validatedefinition.abstract">
             <call method="setDefaultPath">
@@ -66,6 +67,7 @@
             <tag name="console.command"/>
         </service>
         <service id="graviton.jsonschema.command.validatedefinition.file"
+                 public="true"
                  class="Graviton\JsonSchemaBundle\Command\ValidateFileCommand"
                  parent="graviton.jsonschema.command.validatedefinition.abstract">
             <tag name="console.command"/>
