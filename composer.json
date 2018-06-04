@@ -2,7 +2,7 @@
   "name": "graviton/json-schema",
   "description": "JSON Schemas describing the Graviton specific JSON formats",
   "type": "library",
-  "license": "GPL",
+  "license": "MIT",
   "authors": [
     {
       "name": "List of contributors",

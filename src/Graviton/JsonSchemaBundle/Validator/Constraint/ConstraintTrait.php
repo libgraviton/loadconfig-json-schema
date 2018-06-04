@@ -10,7 +10,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author   List of contributors <https://github.com/libgraviton/graviton/graphs/contributors>
- * @license  http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @license  https://opensource.org/licenses/MIT MIT License
  * @link     http://swisscom.ch
  */
 trait ConstraintTrait
@@ -37,28 +37,32 @@ trait ConstraintTrait
      * checks the input
      *
      * @param mixed       $element           element
-     * @param null        $definition        definition
+     * @param null        $schema            schema
      * @param JsonPointer $path              path
+     * @param null        $properties        properties
      * @param null        $additionalProp    added props
      * @param null        $patternProperties pattern props
+     * @param array       $appliedDefaults   applied defaults
      *
      * @return void
      */
     public function check(
         &$element,
-        $definition = null,
+        $schema = null,
         JsonPointer $path = null,
+        $properties = null,
         $additionalProp = null,
-        $patternProperties = null
+        $patternProperties = null,
+        $appliedDefaults = array()
     ) {
         $eventClass = $this->getEventClass();
 
-        $event = new $eventClass($this->factory, $element, $definition, $path);
+        $event = new $eventClass($this->factory, $element, $schema, $path);
         $result = $this->dispatcher->dispatch($event::NAME, $event);
 
         $this->addErrors($result->getErrors());
 
-        parent::check($element, $definition, $path, $additionalProp, $patternProperties);
+        parent::check($element, $schema, $path, $properties, $additionalProp, $patternProperties, $appliedDefaults);
     }
 
     /**
