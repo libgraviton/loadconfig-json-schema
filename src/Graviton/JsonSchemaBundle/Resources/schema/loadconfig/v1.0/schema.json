@@ -444,6 +444,17 @@
           "title": "Can the defined field be searched by search RQL term, weight based query indexing",
           "type": "integer",
           "minimum": 0
+        },
+        "hidden": {
+          "title": "If true, this field will not be serialized",
+          "type": "boolean"
+        },
+        "restrictions": {
+          "title": "A list of restriction handlers (which are registered through RestrictionManager) that are applied to this field",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
