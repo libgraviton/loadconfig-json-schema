@@ -1,9 +1,7 @@
 {
   "title": "A JSON Schema for the Graviton 2 LoadConfig JSON file format.",
-
   "$schema": "http://json-schema.org/draft-04/schema#",
   "$ref": "#/definitions/definition",
-
   "definitions": {
     "collectionName": {
       "type": "string",
@@ -72,7 +70,6 @@
       "type": "string",
       "pattern": "^[A-Z0-9_-]+$"
     },
-
     "definition": {
       "type": "object",
       "properties": {
@@ -140,6 +137,10 @@
           "items": {
             "$ref": "#/definitions/collectionName"
           }
+        },
+        "solr": {
+          "title": "solr definition",
+          "$ref": "#/definitions/solr"
         }
       },
       "required": [
@@ -148,7 +149,6 @@
       ],
       "additionalProperties": false
     },
-
     "service": {
       "type": "object",
       "properties": {
@@ -206,7 +206,6 @@
       "type": "object",
       "additionalProperties": true
     },
-
     "source": {
       "type": "object",
       "properties": {
@@ -233,7 +232,6 @@
       "properties": {},
       "additionalProperties": true
     },
-
     "target": {
       "type": "object",
       "properties": {
@@ -343,7 +341,14 @@
         },
         "defaultValue": {
           "title": "Default value",
-          "type": ["string", "number", "object", "array", "boolean", "null"]
+          "type": [
+            "string",
+            "number",
+            "object",
+            "array",
+            "boolean",
+            "null"
+          ]
         },
         "groups": {
           "title": "A list of groups this field belongs to. Those can be used for various purposes on the backend.",
@@ -360,9 +365,15 @@
         "type": {
           "title": "Field type",
           "oneOf": [
-            {"$ref": "#/definitions/fieldBasicType"},
-            {"$ref": "#/definitions/fieldUpperType"},
-            {"$ref": "#/definitions/fieldClassType"}
+            {
+              "$ref": "#/definitions/fieldBasicType"
+            },
+            {
+              "$ref": "#/definitions/fieldUpperType"
+            },
+            {
+              "$ref": "#/definitions/fieldClassType"
+            }
           ]
         },
         "alternateType": {
@@ -425,8 +436,14 @@
           "type": "array",
           "items": {
             "oneOf": [
-              {"$ref": "#/definitions/collectionName"},
-              {"enum": ["*"]}
+              {
+                "$ref": "#/definitions/collectionName"
+              },
+              {
+                "enum": [
+                  "*"
+                ]
+              }
             ]
           },
           "uniqueItems": true
@@ -525,6 +542,48 @@
         "repository-method",
         "ref-field"
       ]
+    },
+    "solr": {
+      "type": "object",
+      "properties": {
+        "aggregate": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/solrFieldDefinition"
+          }
+        }
+      },
+      "required": [
+        "aggregate",
+        "fields"
+      ],
+      "additionalProperties": false
+    },
+    "solrFieldDefinition": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "weight"
+      ],
+      "additionalProperties": false
     }
   }
 }
