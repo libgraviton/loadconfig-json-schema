@@ -6,7 +6,7 @@
 namespace Graviton\JsonSchemaBundle\Validator\Constraint\Event;
 
 use JsonSchema\Constraints\Factory;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * @author   List of contributors <https://github.com/libgraviton/graviton/graphs/contributors>
