@@ -58,7 +58,7 @@ trait ConstraintTrait
         $eventClass = $this->getEventClass();
 
         $event = new $eventClass($this->factory, $element, $schema, $path);
-        $result = $this->dispatcher->dispatch($event::NAME, $event);
+        $result = $this->dispatcher->dispatch($event, $event::NAME);
 
         $this->addErrors($result->getErrors());
 
