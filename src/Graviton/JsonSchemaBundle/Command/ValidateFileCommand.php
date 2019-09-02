@@ -27,9 +27,7 @@ class ValidateFileCommand extends AbstractValidateCommand
     {
         parent::configure();
 
-        if ($this->getName() === null) {
-            $this->setName('graviton:validate:definition:file');
-        }
+        $this->setName('graviton:validate:definition:file');
 
         $this
             ->setDescription('Validate a JSON definition')

@@ -44,9 +44,7 @@ class ValidateDirectoryCommand extends AbstractValidateCommand
     {
         parent::configure();
 
-        if ($this->getName() === null) {
-            $this->setName('graviton:validate:definition:directory');
-        }
+        $this->setName('graviton:validate:definition:directory');
 
         $this
             ->setDescription('Validate a JSON definition')
